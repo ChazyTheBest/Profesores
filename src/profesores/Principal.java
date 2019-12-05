@@ -6,71 +6,39 @@ public class Principal
 {
     private static Profesor[] altaProfesor(Profesor[] lista, Profesor p)
     {
-/*
- * También se puede hacer de esta manera (sustituyendo el for):
- *
- *      System.arraycopy(old, 0, lista, 0, old.length); o lista = Arrays.copyOf()
- *      lista[old.length + 1] = p;
- */
         Profesor[] old = lista;
 
-        if (lista.length > 0)
+        lista = new Profesor[old.length + 1];
+
+        int num = 0;
+
+        for (Profesor pf : old)
         {
-            int num = 0;
-
-            lista = new Profesor[old.length + 1];
-
-            for (Profesor pf : old)
-            {
-                lista[num] = pf;
-                num++;
-            }
-
-            lista[num] = p;
+            lista[num] = pf;
+            num++;
         }
 
-        else
-        {
-            lista = new Profesor[1];
-
-            lista[0] = p;
-        }
+        lista[num] = p;
 
         return lista;
     }
 
     private static Profesor[] bajaProfesor(Profesor[] lista, int n)
     {
-/*
- * También se puede hacer de esta manera (sustituyendo el for):
- *
- *      if (n == 0)
- *      {
- *          System.arraycopy(old, 1, lista, 0, old.length);
- *      }
- *
- *      else
- *      {
- *          System.arraycopy(old, n - 1, lista, 0, n);
- *          System.arraycopy(old, n + 1, lista, n, old.length - n);
- *      }
- */
-        if (isValidIndex(lista, n) == "ok")
+        Profesor[] old = lista;
+
+        lista = new Profesor[old.length - 1];
+
+        int num = 0;
+
+        for (Profesor p : old)
         {
-            Profesor[] old = lista;
-            int num = 0;
-
-            lista = new Profesor[old.length - 1];
-
-            for (Profesor p : old)
+            if (num != n)
             {
-                if (num != n)
-                {
-                    lista[num > n ? num - 1 : num] = p;
-                }
-
-                num++;
+                lista[num > n ? num - 1 : num] = p;
             }
+
+            num++;
         }
 
         return lista;
@@ -79,10 +47,11 @@ public class Principal
     private static String isValidIndex(Profesor[] lista, int n)
     {
         String text;
+        int length = lista.length;
 
-        if (lista.length > 0)
+        if (length > 0)
         {
-            if (n > -1 && n <= lista.length)
+            if (n > -1 && n <= (length - 1))
             {
                 text = "ok";
             }
