@@ -31,6 +31,8 @@ public class Profesor
         System.out.print("Tipo de IRPF: ");
         while (!sc.hasNextDouble()) sc.next();
         tipoIRPF = sc.nextDouble();
+
+        horasExtra = new int[12];
     }
 
     private double calcularImporteHorasExtras(int mes)
@@ -50,7 +52,7 @@ public class Profesor
 
     private double calcularSueldo(int mes)
     {
-        return calcularSueldoBruto(mes) + calcularRetencionesIrpf(mes);
+        return calcularSueldoBruto(mes) - calcularRetencionesIrpf(mes);
     }
 
     public String imprimeProfesor()
@@ -130,8 +132,8 @@ public class Profesor
         return horasExtra;
     }
 
-    public void setHorasExtra(int[] horasExtra)
+    public void setHorasExtra(int index, int horasExtra)
     {
-        this.horasExtra = horasExtra;
+        this.horasExtra[index] = horasExtra;
     }
 }

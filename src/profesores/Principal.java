@@ -4,7 +4,12 @@ import java.util.Scanner;
 
 public class Principal
 {
-    private static Profesor[] altaProfesor(Profesor[] lista, Profesor p)
+    public static void main(String[] args)
+    {
+        new Principal().go();
+    }
+
+    Profesor[] altaProfesor(Profesor[] lista, Profesor p)
     {
         Profesor[] old = lista;
 
@@ -23,7 +28,7 @@ public class Principal
         return lista;
     }
 
-    private static Profesor[] bajaProfesor(Profesor[] lista, int n)
+    Profesor[] bajaProfesor(Profesor[] lista, int n)
     {
         Profesor[] old = lista;
 
@@ -44,7 +49,7 @@ public class Principal
         return lista;
     }
 
-    private static String isValidIndex(Profesor[] lista, int n)
+    String isValidIndex(Profesor[] lista, int n)
     {
         String text;
         int length = lista.length;
@@ -70,7 +75,7 @@ public class Principal
         return text;
     }
 
-    public static void main(String[] args)
+    void go()
     {
         Profesor[] lista = new Profesor[0];
         Scanner sc = new Scanner(System.in);
@@ -165,9 +170,7 @@ public class Principal
                                 {
                                     System.out.printf("\nNombre profesor: %s\nHoras realizadas: ", p.getNombre());
                                     while (!sc.hasNextInt()) sc.next();
-                                    int[] horasExtra = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-                                    horasExtra[mes] = sc.nextInt();
-                                    p.setHorasExtra(horasExtra);
+                                    p.setHorasExtra(mes, sc.nextInt());
                                 }
                             }
 
