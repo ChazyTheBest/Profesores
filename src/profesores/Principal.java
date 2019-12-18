@@ -1,5 +1,6 @@
 package profesores;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Principal
@@ -49,14 +50,14 @@ public class Principal
         return lista;
     }
 
-    String isValidIndex(Profesor[] lista, int n)
+    String isValidIndex(Profesor[] lista, int index)
     {
         String text;
-        int length = lista.length;
+        int n = lista.length;
 
-        if (length > 0)
+        if (n > 0)
         {
-            if (n > -1 && n <= (length - 1))
+            if (index > -1 && index <= (n - 1))
             {
                 text = "ok";
             }
@@ -73,6 +74,27 @@ public class Principal
         }
 
         return text;
+    }
+
+    Profesor[] burbuja(Profesor[] lista)
+    {
+        int n = lista.length;
+        Profesor tmp;
+
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = i + 1; j < n; j++)
+            {
+                if (lista[j].getNombre().compareTo(lista[i].getNombre()) < 0)
+                {
+                    tmp = lista[i];
+                    lista[i] = lista[j];
+                    lista[j] = tmp;
+                }
+            }
+        }
+
+        return lista;
     }
 
     void go()
@@ -98,6 +120,8 @@ public class Principal
             System.out.println("\t4. INTRODUCIR HORAS EXTRAORDINARIAS DE UN MES");
             System.out.println("\t5. LISTADO DE PROFESORES");
             System.out.println("\t6. LISTADO DE NOMINAS DE UN MES");
+            System.out.println("\t7. ORDENAR POR NOMBRE UTILIZANDO EL MÉTODO DE LA BURBUJA");
+            System.out.println("\t8. ORDENAR POR DNI UTILIZANDO EL INTERFACE COMPARABLE");
             System.out.println("\t0. SALIR DEL PROGRAMA");
             System.out.print("\n\n\nOPCION SELECCIONADA: ");
 
@@ -160,7 +184,7 @@ public class Principal
                         while (!sc.hasNextInt()) sc.next();
                         int mes = sc.nextInt() - 1; // array index starts at 0
 
-                        if (mes > -1 && mes <= 11)
+                        if (mes > -1 && mes < 12)
                         {
                             text = isValidIndex(lista, 0);
 
@@ -209,7 +233,7 @@ public class Principal
 
                         break;
                     }
-                    case 6: // print all nominas (what are nominas lol) for a given month
+                    case 6: // print all payrolls for a given month
                     {
                         System.out.print("Nóminas del mes: ");
                         while (!sc.hasNextInt()) sc.next();
@@ -231,6 +255,18 @@ public class Principal
                         }
 
                         System.out.println(text);
+
+                        break;
+                    }
+                    case 7:
+                    {
+                        lista = burbuja(lista);
+
+                        break;
+                    }
+                    case 8:
+                    {
+                        Arrays.sort(lista);
 
                         break;
                     }

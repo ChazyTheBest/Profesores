@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.time.Month;
 import java.time.format.TextStyle;
 
-public class Profesor
+public class Profesor implements Comparable<Profesor>
 {
     private static String curso = "";
     private static double pagoPorHoraExtra = 0;
@@ -65,6 +65,12 @@ public class Profesor
         return String.format("Nombre: %s\nDNI: %s\nCurso: %s   Nómina mes: %s\nSueldo Base: %.2f\nHoras Extra: %d\nTipo de IRPF: %.2f\nSueldo Bruto: %.2f\nRetención por IRPF: %.2f\nSueldo Neto: %.2f\n",
                               nombre, dni, curso, Month.of(mes + 1).getDisplayName(TextStyle.FULL, Locale.getDefault()), sueldoBase,
                               horasExtra[mes], tipoIRPF, calcularSueldoBruto(mes), calcularRetencionesIrpf(mes), calcularSueldo(mes));
+    }
+
+    @Override
+    public int compareTo(Profesor p)
+    {
+        return dni.compareTo(p.dni);
     }
 
     public static String getCurso()
